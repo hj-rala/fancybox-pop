@@ -1,0 +1,42 @@
+
+
+<a href="popup.html" class="popOpen">팝업오픈</a>
+
+
+
+
+
+<script type="text/javascript">
+
+$(function(){
+	// layer popup
+	var LayerWidth = function(){
+		var winWidth = $(window).width();
+		if (winWidth > 1200) { var layerCheck = 1200; }
+		else if (winWidth < 1200 && winWidth > 900) { var layerCheck = 900; }
+		else if (winWidth < 900 && winWidth > 541) { var layerCheck = 541; }
+		else if (winWidth < 541 && winWidth > 360) { var layerCheck = 360; }
+		else { var layerCheck = 320; }
+
+		$(".popOpen").fancybox({
+			'autoDimensions': false,
+			'showCloseButton': false,
+			'width': layerCheck,
+			'padding': 0,
+			'scrolling':'no',
+			'type': 'iframe',
+			'onComplete': function () {
+				$('#fancybox-frame').load(function () { // wait for frame to load and then gets it's height
+				$('#fancybox-content').height($(this).contents().find('body').height());
+				$.fancybox.resize();
+				});
+			}
+		});
+	}; LayerWidth();
+
+	$(window).resize(function(){
+		LayerWidth();
+	});
+ 
+ 
+ </script>
